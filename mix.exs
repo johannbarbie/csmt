@@ -9,7 +9,15 @@ defmodule CSMT.MixProject do
       start_permanent: Mix.env() == :prod,
       description: description(),
       package: package(),
-      deps: deps()
+      deps: deps(),
+      compilers: Mix.compilers ++ [:elixir_script],
+      # Our elixir_script configuration
+      elixir_script: [
+          # Entry module. Can also be a list of modules
+          input: CSMT,
+          # Output path. Either a path to a js file or a directory
+          output: "dist/js"
+      ]      
     ]
   end
 
@@ -43,7 +51,8 @@ defmodule CSMT.MixProject do
     [
       {:exprotobuf, "~> 1.2"},
       {:ex_doc, "~> 0.18.0", only: :dev, runtime: false},
-      {:elixir_uuid, "~> 1.2"}
+      {:elixir_uuid, "~> 1.2"},
+      {:elixir_script, "0.32.1"}
     ]
   end
 end
